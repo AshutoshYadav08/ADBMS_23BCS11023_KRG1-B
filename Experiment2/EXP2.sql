@@ -1,0 +1,73 @@
+
+
+
+
+
+
+create table EMPLOYEE ( EID INT PRIMARY KEY , ENAME VARCHAR(10) , DEPT VARCHAR(20), MANAGERID INT );
+
+
+INSERT INTO EMPLOYEE(EID,ENAME,DEPT,MANAGERID) 
+VALUES 
+(1,'ALICE','HR',NULL),
+(2,'BOB','FINANCE',1),
+(3,'CHARLIE','IT',1),
+(4,'DAVID','IT',2),
+(5,'EVE','IT',3),
+(6,'FRANK','IT',3)
+
+
+SELECT E1.ENAME AS [EMPLOYEE NAME] , E1.DEPT , E2.ENAME AS [MANAGER NAME]
+FROM EMPLOYEE AS E1
+LEFT OUTER JOIN
+EMPLOYEE AS E2
+ON
+E1.MANAGERID = E2.EID
+
+
+
+---HARD LEVEL
+--(B) part
+-- Create Year_tbl (holds actual NPV values)
+CREATE TABLE Year_tbl (
+    ID INT,
+    YEAR INT,
+    NPV INT
+);
+
+-- Create Queries table (requested values)
+CREATE TABLE Queries (
+    ID INT,
+    YEAR INT
+);
+
+-- Insert data into Year_tbl
+INSERT INTO Year_tbl (ID, YEAR, NPV)
+VALUES
+(1, 2018, 100),
+(7, 2020, 30),
+(13, 2019, 40),
+(1, 2019, 113),
+(2, 2008, 121),
+(3, 2009, 12),
+(11, 2020, 99),
+(7, 2019, 0);
+
+-- Insert data into Queries
+INSERT INTO Queries (ID, YEAR)
+VALUES
+(1, 2019),
+(2, 2008),
+(3, 2009),
+(7, 2018),
+(7, 2019),
+(7, 2020),
+(13, 2019);
+
+--SOLUTION
+SELECT Q.ID , Q.YEAR , ISNULL(Y.NPV,0) AS NPV 
+FROM Queries AS Q
+LEFT OUTER JOIN
+Year_tbl AS Y
+ON
+Q.ID = Y.ID AND Q.YEAR = Y.YEAR
