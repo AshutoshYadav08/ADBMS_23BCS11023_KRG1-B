@@ -20,7 +20,7 @@ BEGIN
     BEGIN
         INSERT INTO students(name, age, class) VALUES ('Yash',17,8);
         INSERT INTO students(name, age, class) VALUES ('Diksha',19,9);
-        INSERT INTO students(name, age, class) VALUES ('Ajju',16,8);
+        INSERT INTO students(name, age, class) VALUES ('Ashutosh',16,8);
 
         RAISE NOTICE 'Transaction Successfully Done';
 
@@ -38,7 +38,7 @@ SELECT * FROM students;
 BEGIN;  -- start transaction
 
 SAVEPOINT sp1;
-INSERT INTO students(name, age, class) VALUES ('Ashu',16,8);
+INSERT INTO students(name, age, class) VALUES ('Aman',16,8);
 
 SAVEPOINT sp2;
 BEGIN
